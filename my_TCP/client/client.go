@@ -24,7 +24,7 @@ const (
 	SUCCESS = GREEN + "<SUCCESS>:" + RESET
 )
 
-const bufferSize = 4096
+const bufferSize = 1024
 
 func main() {
 	if len(os.Args) < 4 {

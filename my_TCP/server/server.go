@@ -71,6 +71,12 @@ func handleConnection(conn net.Conn) {
 		fmt.Println(ERROR+"Ошибка чтения размера файла.\n"+ERROR, err)
 		return
 	}
+	fileSizeStr = fileSizeStr[:len(fileSizeStr)-1] // Удаление символа новой строки
+	fileSize, err := strconv.Atoi(fileSizeStr)
+	if err != nil {
+		fmt.Println(ERROR+"Ошибка преобразования размера файла.\n"+ERROR, err)
+		return
+	}
 
 	// Чтение размера буфера
 	bufferSizeRaw, err := reader.ReadString('\n')
@@ -78,17 +84,10 @@ func handleConnection(conn net.Conn) {
 		fmt.Println(ERROR+"Ошибка чтения размера буфера.\n"+ERROR, err)
 		return
 	}
-	bufferSizeRaw = bufferSizeRaw[:len(fileSizeStr)-1]
+	bufferSizeRaw = bufferSizeRaw[:len(bufferSizeRaw)-1] //удаление символа новой строки
 	bufferSize, err := strconv.Atoi(bufferSizeRaw)
 	if err != nil {
 		fmt.Println(ERROR+"Ошибка преобразования размера буфера.\n"+ERROR, err)
-		return
-	}
-
-	fileSizeStr = fileSizeStr[:len(fileSizeStr)-1] // Удаление символа новой строки
-	fileSize, err := strconv.Atoi(fileSizeStr)
-	if err != nil {
-		fmt.Println(ERROR+"Ошибка преобразования размера файла.\n"+ERROR, err)
 		return
 	}
 
@@ -112,12 +111,12 @@ func handleConnection(conn net.Conn) {
 	totalBytesRead := int64(0)
 	startTime := time.Now()
 	previousBytes := int64(0)
+	previousTime := float64(0)
 
 	done := make(chan struct{}) // Канал для завершения горутины
 
 	go func() {
 		ch := 0
-		sumElapsedTime := float64(0)
 		sumBytesRecivedTime := float64(0)
 		for {
 			select {
@@ -125,25 +124,28 @@ func handleConnection(conn net.Conn) {
 				currentTime := time.Now()
 				elapsedTime := currentTime.Sub(startTime).Seconds()
 				bytesReceived := totalBytesRead - previousBytes
+				timeSpent := elapsedTime - previousTime
 				previousBytes = totalBytesRead
-				sumElapsedTime += elapsedTime
+				previousTime = elapsedTime
 				sumBytesRecivedTime += float64(bytesReceived)
 				ch = 1
-
+				fmt.Println(bytesReceived)
 				if elapsedTime > 0 {
-					speed := float64(bytesReceived) / elapsedTime // Байт/с
+					speed := float64(bytesReceived) / timeSpent // Байт/с
 					fmt.Printf(LOG+"Мгновенная скорость: %.2f байт/с\n", speed)
-					fmt.Printf(LOG+"Скорость за сеанс: %.2f байт/с\n", sumBytesRecivedTime/sumElapsedTime)
+					fmt.Printf(LOG+"Скорость за сеанс: %.2f байт/с\n", float64(sumBytesRecivedTime)/elapsedTime)
 				}
 			case <-done:
 				if ch == 0 {
 					currentTime := time.Now()
 					elapsedTime := currentTime.Sub(startTime).Seconds()
 					bytesReceived := totalBytesRead - previousBytes
+					timeSpent := elapsedTime - previousTime
 					previousBytes = totalBytesRead
+					previousTime = elapsedTime
 
 					if elapsedTime > 0 {
-						speed := float64(bytesReceived) / elapsedTime // Байт/сек
+						speed := float64(bytesReceived) / timeSpent // Байт/сек
 						fmt.Printf(LOG+"Мгновенная скорость: %.2f байт/с\n", speed)
 						fmt.Printf(LOG+"Скорость за сеанс: %.2f байт/с\n", speed)
 					}
@@ -154,7 +156,9 @@ func handleConnection(conn net.Conn) {
 	}()
 
 	for totalBytesRead < int64(fileSize) {
+		time.Sleep(time.Second)
 		n, err := reader.Read(buffer)
+		fmt.Println(n)
 		if err != nil {
 			if err == io.EOF {
 				break // Конец файла
