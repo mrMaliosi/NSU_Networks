@@ -129,11 +129,10 @@ func handleConnection(conn net.Conn) {
 				previousTime = elapsedTime
 				sumBytesRecivedTime += float64(bytesReceived)
 				ch = 1
-				fmt.Println(bytesReceived)
 				if elapsedTime > 0 {
 					speed := float64(bytesReceived) / timeSpent // Байт/с
-					fmt.Printf(LOG+"Мгновенная скорость: %.2f байт/с\n", speed)
-					fmt.Printf(LOG+"Скорость за сеанс: %.2f байт/с\n", float64(sumBytesRecivedTime)/elapsedTime)
+					fmt.Printf(LOG+fileName+" Мгновенная скорость: %.2f байт/с\n", speed)
+					fmt.Printf(LOG+fileName+" Скорость за сеанс: %.2f байт/с\n", float64(sumBytesRecivedTime)/elapsedTime)
 				}
 			case <-done:
 				if ch == 0 {
@@ -146,8 +145,8 @@ func handleConnection(conn net.Conn) {
 
 					if elapsedTime > 0 {
 						speed := float64(bytesReceived) / timeSpent // Байт/сек
-						fmt.Printf(LOG+"Мгновенная скорость: %.2f байт/с\n", speed)
-						fmt.Printf(LOG+"Скорость за сеанс: %.2f байт/с\n", speed)
+						fmt.Printf(LOG+fileName+"Мгновенная скорость: %.2f байт/с\n", speed)
+						fmt.Printf(LOG+fileName+"Скорость за сеанс: %.2f байт/с\n", speed)
 					}
 				}
 				return
@@ -158,7 +157,6 @@ func handleConnection(conn net.Conn) {
 	for totalBytesRead < int64(fileSize) {
 		time.Sleep(time.Second)
 		n, err := reader.Read(buffer)
-		fmt.Println(n)
 		if err != nil {
 			if err == io.EOF {
 				break // Конец файла

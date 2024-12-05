@@ -1,3 +1,0 @@
-go run client/client.go localhost 8080 client/OMG_SECRET_FILE
-
-go build -o server/server.exe server/server.go; ./server/server.exe 8080
