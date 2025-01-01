@@ -4,3 +4,4 @@
 * [Обнаружение копий себя в локальной сети](https://github.com/mrMaliosi/NSU_Networks/tree/main/UDP_multicast)
 * [Передача файла по TCP с подсчётом скорости](https://github.com/mrMaliosi/NSU_Networks/tree/main/my_TCP)
 * [Подключение к Mistral AI по IP](https://github.com/mrMaliosi/NSU_Networks/tree/main/API)
+* [SOCKS5 прокси](https://github.com/mrMaliosi/NSU_Networks/tree/main/SOCKS_proxy)
