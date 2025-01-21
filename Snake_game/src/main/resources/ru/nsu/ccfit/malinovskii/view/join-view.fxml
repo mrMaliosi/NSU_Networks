@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.ccfit.malinovskii.Controller.JoinGameController">
+    <Label layoutX="191.0" layoutY="37.0" prefHeight="40.0" prefWidth="219.0" text="Присоединиться">
+        <font>
+            <Font size="28.0" />
+        </font>
+    </Label>
+    <TextField fx:id="PlayerNameField" layoutX="226.0" layoutY="157.0" promptText="Имя игрока" />
+    <Label fx:id="ErrorLabel" alignment="CENTER" layoutX="90.0" layoutY="267.0" prefHeight="32.0" prefWidth="421.0" />
+    <Button fx:id="OkButton" layoutX="239.0" layoutY="313.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="123.0" text="ОК">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Button>
+   <CheckBox fx:id="spectatorCheckBox" layoutX="218.0" layoutY="198.0" mnemonicParsing="false" text="Режим спектатора">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </CheckBox>
+</AnchorPane>

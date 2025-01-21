@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.ccfit.malinovskii.Controller.MenuController">
+    <children>
+        <Button fx:id="newGameButton" layoutX="40.0" layoutY="32.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="250.0" text="Новая игра" />
+        <Button fx:id="exitButton" layoutX="1150.0" layoutY="32.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="250.0" text="выйти" />
+        <TableView fx:id="gamesTable" layoutX="40.0" layoutY="100.0" prefHeight="660.0" prefWidth="1360.0" xmlns:fx="http://javafx.com/fxml">
+            <columns>
+                <TableColumn fx:id="gameNameColumn" prefWidth="394.0" text="Название" />
+                <TableColumn fx:id="leaderColumn" prefWidth="279.0" text="Ведущий" />
+                <TableColumn fx:id="playersCountColumn" prefWidth="251.0" text="Число игроков" />
+                <TableColumn fx:id="configColumn" prefWidth="293.0" text="Размер и еда" />
+                <TableColumn fx:id="joinButtonColumn" prefWidth="142.0" text="Присоединиться" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

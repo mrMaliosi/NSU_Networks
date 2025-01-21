@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="gamePane" prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.ccfit.malinovskii.Controller.GameController">
+    <Canvas fx:id="gameCanvas" height="800" layoutX="0" layoutY="0" width="1200" />
+   <Label fx:id="gameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1212.0" layoutY="14.0" prefHeight="26.0" prefWidth="214.0" textAlignment="CENTER">
+      <font>
+         <Font size="24.0" />
+      </font>
+      <effect>
+         <Glow />
+      </effect>
+   </Label>
+   <Label layoutX="1212.0" layoutY="49.0" text="Ведущий:" textFill="#00b23e">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="1212.0" layoutY="74.0" text="Размер:" textFill="#ffbb00">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="1212.0" layoutY="99.0" text="Еда:" textFill="#ff2b00">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label fx:id="adminLabel" layoutX="1288.0" layoutY="49.0" prefHeight="25.0" prefWidth="141.0">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label fx:id="sizeLabel" layoutX="1275.0" layoutY="74.0" prefHeight="25.0" prefWidth="154.0">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label fx:id="foodLabel" layoutX="1249.0" layoutY="99.0" prefHeight="25.0" prefWidth="181.0">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <TableView fx:id="scoreTable" layoutX="1200.0" layoutY="140.0" prefHeight="630.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml">
+      <columns>
+         <TableColumn fx:id="playerColumn" prefWidth="120.0" text="Имя" />
+         <TableColumn fx:id="colorColumn" prefWidth="20.0" text="#" />
+         <TableColumn fx:id="pointsColumn" prefWidth="60.0" text="Счёт" />
+      </columns>
+   </TableView>
+</AnchorPane>
